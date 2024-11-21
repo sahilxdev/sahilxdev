@@ -5,7 +5,7 @@
 [![](https://visitcount.itsvg.in/api?id=sahilxdev&icon=0&color=12)](https://visitcount.itsvg.in)
 
 # 💫 About Me:
-🔭 I’m currently working on Full Stack and DevOps<br><br>🌱<br><br>💬 Ask me about Nextjs, Node.js, React, Postgresql, MongoDB, Docker Etc.
+🔭 I’m currently working on Full Stack and DevOps<br><br>💬 Ask me about Nextjs, Node.js, React, Postgresql, MongoDB, Docker Etc.
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/sahilxdev) [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/sahilxdev) 
