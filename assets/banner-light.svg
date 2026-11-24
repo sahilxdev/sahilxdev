@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" role="img" aria-labelledby="t">
+  <title id="t">Sahil Meena. Founder and CEO, Capvise Group. I build the rooms where builders meet capital.</title>
+  <rect x="1" y="1" width="1198" height="418" rx="28" fill="#F1F0EC" stroke="#DEDCD3" stroke-width="2"/>
+  <g font-family="'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif">
+    <circle cx="86" cy="78" r="24" fill="#20241D"/>
+    <text x="86" y="84" text-anchor="middle" font-size="16" font-weight="700" fill="#F1F0EC">SM</text>
+    <text x="126" y="85" font-size="20" font-weight="600" fill="#20241D">sahilxdev</text>
+    <text x="1138" y="85" text-anchor="end" font-size="18" fill="#6F7369">capvise.group</text>
+    <text x="56" y="232" font-size="128" font-weight="500" letter-spacing="-5" fill="#20241D">Sahil Meena</text>
+    <text x="62" y="304" font-size="40" letter-spacing="-0.8" fill="#6F7369">I build the rooms where <tspan font-family="Georgia, 'Times New Roman', 'DejaVu Serif', serif" font-style="italic" fill="#7C8D63">builders</tspan> meet capital.</text>
+    <line x1="62" y1="342" x2="1138" y2="342" stroke="#DEDCD3" stroke-width="2"/>
+    <circle cx="68" cy="375" r="5" fill="#7C8D63"/>
+    <text x="86" y="381" font-size="17" font-weight="600" letter-spacing="1.6" fill="#20241D">FOUNDER AND CEO, CAPVISE GROUP</text>
+    <text x="1138" y="381" text-anchor="end" font-size="15" letter-spacing="1.6" fill="#6F7369">BALI  /  SINGAPORE  /  DUBAI  /  BUENOS AIRES</text>
+  </g>
+</svg>
