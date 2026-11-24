@@ -42,7 +42,7 @@ In 2025, Capvise Global ran four founder and investor rooms in four countries in
     <td align="center" width="25%"><h3>6,400+</h3>applications</td>
     <td align="center" width="25%"><h3>950+</h3>seats</td>
     <td align="center" width="25%"><h3>4</h3>countries</td>
-    <td align="center" width="25%"><h3>12</h3>speakers on stage</td>
+    <td align="center" width="25%"><h3>12</h3>speakers</td>
   </tr>
 </table>
 
@@ -100,7 +100,7 @@ Eight independent ventures, started in January 2025.
 
 ## Path
 
-| Year | |
+| Year | Milestones |
 | :-- | :-- |
 | 2026 | Sat on the evaluation panel at Claude Impact Lab. Open-sourced Cwtch. |
 | 2025 | Founded Capvise Group. COO at BackersStage, April to December. Ran four rooms in four countries. Built OmniSweep at ETHGlobal Buenos Aires. |
@@ -109,7 +109,7 @@ Eight independent ventures, started in January 2025.
 
 ## Stack
 
-| | |
+| Area | Tools |
 | :-- | :-- |
 | **Web** | TypeScript, JavaScript, Next.js, React, Node.js, Express, Tailwind CSS, Socket.io |
 | **Data** | PostgreSQL, MongoDB, Redis, Prisma |
