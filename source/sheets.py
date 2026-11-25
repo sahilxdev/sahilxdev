@@ -168,20 +168,21 @@ RM = '@media (prefers-reduced-motion:reduce){*{animation:none!important}}'
 
 
 def work(c, title, alt, meta, desc, stack, fig):
-    s = Sheet(262, c, alt)
+    n = len(Sheet.wrap(desc, S4, 18, 520))
+    s = Sheet(round(128 + n * 25.5 + 50), c, alt)       # the room is as deep as its text
     W, H = s.W, s.H
     s.walls([('top', DOOR_X, DOOR_W, None), ('bottom', DOOR_X, DOOR_W, None)])
     s.text(M - 2, 90, title, S5, 44, c['ink'], ls=-0.035)
     y = s.para(M, 128, desc, S4, 18, c['mute'], 520, 25.5)
     s.text(M, y + 8, stack, S4, 15, c['ink2'])
     s.text(W - M, 50, meta, S4, 15, c['mute'], anchor='end')
-    fig(s, c)
+    fig(s, c, H / 2 + 16)
     s.css.append(RM)
     return s
 
 
-def fig_cwtch(s, c):
-    x0, x1, ya, yb = 656, 932, 122, 180
+def fig_cwtch(s, c, cy):
+    x0, x1, ya, yb = 656, 932, cy - 26, cy + 30
     for y, lab in ((ya, 'You'), (yb, 'Them')):
         s.text(x0, y - 16, lab, S4, 14, c['mute'])
         s.line(x0, y, x1, y, c['faint'], 1.2)
@@ -196,8 +197,8 @@ def fig_cwtch(s, c):
                  f'56%{{transform:translateX({span * .25:.0f}px)}}100%{{transform:translateX({span}px)}}}}')
 
 
-def fig_omni(s, c):
-    cx, cy = 706, 146
+def fig_omni(s, c, cy):
+    cx, cy = 706, cy - 6
     rng = random.Random(7)
     specks = ''
     for i in range(18):
@@ -219,8 +220,8 @@ def fig_omni(s, c):
                  f'.cm{{animation:cm 8s ease-in-out infinite}}@keyframes cm{{0%,42%{{transform:translateX(0)}}74%,100%{{transform:translateX({904 - cx}px)}}}}')
 
 
-def fig_hyper(s, c):
-    x0, x1, cy, b, pitch = 656, 932, 150, 30, 46
+def fig_hyper(s, c, cy):
+    x0, x1, b, pitch = 656, 932, 30, 46
     s.extra_defs.append(f'<clipPath id="cw"><rect x="{x0}" y="{cy - 40}" width="{x1 - x0}" height="80"/></clipPath>')
     blocks = ''
     for i in range(9):
@@ -325,12 +326,12 @@ TOOLS = [('Web', 'TypeScript, Next.js, React, Node.js, Tailwind CSS'), ('Data', 
 
 
 def block(c):
-    s = Sheet(620, c, 'Title block. Path from 2023 to 2026, tools, and contact: sahil@capvise.group.')
+    s = Sheet(606, c, 'Title block. Path from 2023 to 2026, tools, and contact: sahil@capvise.group.')
     W, H = s.W, s.H
     s.walls([('top', DOOR_X, DOOR_W, None)])
     s.text(M, 86, 'Building something, or raising for it?', S4, 19.5, c['mute'])
     s.runs(M - 3, 140, [('Write to ', S5, c['ink']), ('sahil@capvise.group', S5, c['sage'])], 47, ls=-0.035)
-    x0, x1, y0, y1 = M, W - M, 196, H - 62
+    x0, x1, y0, y1 = M, W - M, 196, H - 56
     xa, xb = 470, 760
     hl = c['faint']
     s.add(f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" fill="none" stroke="{hl}" stroke-width="1.2"/>')
