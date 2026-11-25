@@ -167,6 +167,96 @@ def rooms():
     return s
 
 
+# ------------------------------------------------------------------ rooms 2026
+R26 = [('Hong Kong', 'Whiskey & Whales', 850, 150, '850+'), ('Hong Kong', 'Whales After Dark', 750, 100, '750+'),
+       ('Cannes', 'Onchain Dev City', 600, 200, '600+'), ('Cannes', 'Whiskey & Whales', 700, 100, '700+'),
+       ('Paris', 'Founders & Capital', 30, 30, '30+'), ('Bali', 'Whiskey & Whales', 150, 50, '150+'),
+       ('Barcelona', 'Whiskey & Whales', 550, 150, '550+'), ('Seoul', 'Kimchi & Whales', 0, 10, None),
+       ('Singapore', 'Money Layer', 900, 300, '900+'), ('Singapore', 'Institutions & Whales', 550, 25, '550+'),
+       ('Mumbai', 'Onchain Dev City', 1000, 250, '1,000+'), ('Mumbai', 'Money Layer', 750, 250, '750+'),
+       ('London', 'Money Layer', 350, 150, '350+')]
+
+
+def rooms26():
+    tot_a = sum(r[2] for r in R26); tot_s = sum(r[3] for r in R26)
+    alt = ('Thirteen rooms in 2026. Each little figure is 25 people. ' +
+           ' '.join(f'{ev}, {city}: {(al + " applied for ") if al else ""}{seats} seats.' for city, ev, apps, seats, al in R26) +
+           f' In all, {tot_a:,}+ applied for {tot_s:,} seats.')
+    u, gap, sp, per, hh, t = 21, 0.7, 0.58, 25, 1.9, 0.16
+    WR, WL, WT, FLOOR = '#6B7A4F', '#55633E', '#93A374', '#FFFFFF'
+    cells = []
+    for city, ev, apps, seats, al in R26:
+        side = max(math.sqrt(seats) / 4.4, 0.95)
+        cols = max(2, round(side / sp))
+        n_out = max(1, round(apps / per)) if apps else 0
+        rows = math.ceil(n_out / cols)
+        ymax = side + (gap + rows * sp if rows else 0)
+        left = max(ymax * C30 * u + 6, 78); right = max(side * C30 * u + 6, 78)
+        depth = (max(side, cols * sp) + ymax) * S30 * u
+        cells.append(dict(city=city, ev=ev, apps=apps, seats=seats, al=al, side=side, cols=cols, n_out=n_out, rows=rows, left=left, right=right, depth=depth))
+    # three balanced rows: pick the split whose widest row is narrowest
+    x0, x1 = 44, 956
+    wd = [c['left'] + c['right'] for c in cells]
+    best = None
+    for split in ((5, 4, 4), (4, 5, 4), (4, 4, 5)):
+        i = 0; rows_w = []
+        for n in split:
+            rows_w.append(sum(wd[i:i + n])); i += n
+        if best is None or max(rows_w) < best[0]: best = (max(rows_w), split)
+    lines, i = [], 0
+    for n in best[1]:
+        lines.append(cells[i:i + n]); i += n
+    top = 150; label_h = 84
+    heights = [label_h + hh * u + max(c['depth'] for c in ln) + 34 for ln in lines]
+    s = Panel(round(top + sum(heights) + 46), '#E9E8DE', alt)
+    W, H = s.W, s.H
+    a = s.add
+    s.text(53, 92, 'Then thirteen more.', S5, 44, INK2, ls=-0.035)
+    s.runs(56, 128, [(f'In 2026, {tot_a:,}+ people applied for ', S4, MUTE), (f'{tot_s:,} seats', S6, SAGE), ('.', S4, MUTE)], 19.5)
+    y = top; ri = 0
+    for ln, hgt in zip(lines, heights):
+        slack = (x1 - x0 - sum(c['left'] + c['right'] for c in ln)) / len(ln)
+        x = x0
+        oy = y + label_h + hh * u
+        for c in ln:
+            ox = x + slack / 2 + c['left']; x += c['left'] + c['right'] + slack
+            iso = Iso(ox, oy, u); side = c['side']
+            a(iso.box(0, 0, -0.2, side, side, 0.2, FLOOR, '#C3C3B4', '#AFAFA0'))
+            a(iso.box(-t, 0, -0.2, t, side, hh + 0.2, WT, WR, WL))
+            a(iso.box(-t, -t, -0.2, side + t, t, hh + 0.2, WT, WR, '#4A5736'))
+            n_in = max(1, round(c['seats'] / per)); ic = max(1, round(math.sqrt(n_in))); nr = math.ceil(n_in / ic); k = 0
+            inside = []
+            for r in range(nr):
+                for ci in range(ic):
+                    if k >= n_in: break
+                    px, py = (ci + 0.5) * side / ic, (r + 0.5) * side / nr
+                    inside.append((px + py, person(*iso.p(px, py), SAGE, 0.66, so=0.12))); k += 1
+            for _, g in sorted(inside, key=lambda q: q[0]): a(g)
+            k = 0
+            for r in range(c['rows']):
+                row = ''
+                for ci in range(c['cols']):
+                    if k >= c['n_out']: break
+                    row += person(*iso.p((ci + 0.5) * sp, side + gap + (r + 0.5) * sp), INK2, 0.66, so=0.10); k += 1
+                a(f'<g class="rp" style="animation-delay:-{(c["rows"] - r) * 0.09 + ri * 0.31:.2f}s">{row}</g>')
+            lx, ly = iso.p(0, 0, hh)
+            s.text(lx, ly - 54, c['city'], S5, 19, INK2, ls=-0.02, anchor='middle')
+            s.text(lx, ly - 36, c['ev'], S4, 13.5, MUTE, anchor='middle')
+            if c['al']:
+                wA = S6.width(c['al'] + ' applied', 13.5); wS = S6.width(f'  {c["seats"]} seats', 13.5)
+                xx = lx - (wA + wS) / 2
+                s.text(xx, ly - 17, c['al'] + ' applied', S6, 13.5, INK2); s.text(xx + wA, ly - 17, f'  {c["seats"]} seats', S6, 13.5, SAGE)
+            else:
+                s.text(lx, ly - 17, f'{c["seats"]} seats', S6, 13.5, SAGE, anchor='middle')
+            ri += 1
+        y += hgt
+    lx, ly = 56, H - 44
+    a(person(lx + 6, ly + 6, INK2, 0.75)); s.text(lx + 20, ly, 'one figure is 25 people', S4, 14.5, MUTE)
+    a(person(lx + 206, ly + 6, SAGE, 0.75)); s.text(lx + 220, ly, 'sage figures had a seat', S4, 14.5, MUTE)
+    s.css.append('.rp{animation:rp 2.6s ease-in-out infinite}' + kf('rp', [(0, 'transform:none'), (10, 'transform:translateY(-4px)'), (22, 'transform:none'), (100, 'transform:none')]))
+    return s
+
+
 # ------------------------------------------------------------------ 2027 map
 CITY = {'Bali': (115.2, -8.4), 'Singapore': (103.8, 1.35), 'Dubai': (55.3, 25.2), 'Buenos Aires': (-58.4, -34.6), 'Hong Kong': (114.2, 22.3),
         'Cannes': (7.0, 43.55), 'Paris': (2.35, 48.86), 'Barcelona': (2.17, 41.39), 'Seoul': (126.98, 37.57), 'Mumbai': (72.88, 19.08),
@@ -548,7 +638,7 @@ def contact():
     return s
 
 
-SCENES = {'hero': hero, 'rooms': rooms, 'tour': tour, 'cwtch': cwtch, 'omnisweep': omni, 'hypersight': hyper, 'group': group, 'path': path_, 'contact': contact}
+SCENES = {'hero': hero, 'rooms': rooms, 'rooms26': rooms26, 'tour': tour, 'cwtch': cwtch, 'omnisweep': omni, 'hypersight': hyper, 'group': group, 'path': path_, 'contact': contact}
 
 if __name__ == '__main__':
     only = sys.argv[1:]

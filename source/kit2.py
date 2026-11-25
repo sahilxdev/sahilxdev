@@ -55,10 +55,12 @@ class Panel(_Base):
         return wu * k
 
     def svg(self):
+        import html
         W, H = self.W, self.H
+        ttl = html.escape(self.title, quote=True)
         defs = ''.join(f'<path id="{k}" d="{v}"/>' for k, v in sorted(self.defs.items()))
-        return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{self.title}">'
-                f'<title>{self.title}</title><style>{"".join(self.css)}</style><defs>{defs}{"".join(self.extra_defs)}'
+        return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{ttl}">'
+                f'<title>{ttl}</title><style>{"".join(self.css)}</style><defs>{defs}{"".join(self.extra_defs)}'
                 f'<clipPath id="pn"><rect width="{W}" height="{H}" rx="{self.r}"/></clipPath></defs>'
                 f'<g clip-path="url(#pn)"><rect width="{W}" height="{H}" fill="{self.bg}"/>{"".join(self.body)}</g></svg>\n')
 
