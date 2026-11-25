@@ -1,124 +1,84 @@
 <a href="https://sahil.capvise.group">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
-    <img src="assets/banner-light.svg" width="100%" alt="Sahil Meena. Founder and CEO, Capvise Group. I build the rooms where builders meet capital.">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/entrance-dark.svg">
+    <img src="assets/entrance-light.svg" width="100%" alt="Sahil Meena. Founder and CEO, Capvise Group. I build the rooms where builders meet capital. A room drawn in plan: builders come in through one door, capital through the other, and they meet in the middle.">
   </picture>
 </a>
 
-<br>
+<p align="center">
+  <a href="https://sahil.capvise.group">Portfolio</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://x.com/sahilxdev">X</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://linkedin.com/in/sahilxdev">LinkedIn</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/sahilxdev">Telegram</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="mailto:sahil@capvise.group">Email</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://luma.com/capvise">Events</a>
+</p>
 
-I'm the founder and CEO of [Capvise Group](https://capvise.group), a group of eight ventures across capital, technology, media and communities. Its flagship, [Capvise Global](https://global.capvise.group), runs founder and investor rooms alongside major conferences.
+<a href="https://global.capvise.group">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/rooms-dark.svg">
+    <img src="assets/rooms-light.svg" width="100%" alt="Four rooms, four countries, four months. One dot is one person: in 2025, 950 had a seat and 6,400 applied. Bali, August: 600+ applied for 100+ seats, Founder × VC Happy Hour alongside Coinfest Asia. Singapore, September: 4,000+ applied for 500 seats, Founder × VC Summit alongside TOKEN2049. Dubai, October: 600+ applied for 150+ seats, Founder × VC Happy Hour alongside Blockchain Life. Buenos Aires, November: 1,200+ applied for 200 seats, Somnia Dev City alongside Devconnect Argentina. Twelve speakers took the stage, from Animoca Brands, Venom Foundation, Camp Network, Manta Network, Bitcoin.com, Somnia Network and others.">
+  </picture>
+</a>
 
-I came to this as a builder. I've shipped full-stack products since 2023, worked hands-on with open-source image and video models, and I still ship code.
+<a href="https://luma.com/capvise">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/y2027-dark.svg">
+    <img src="assets/y2027-light.svg" width="100%" alt="Sixteen rooms on the 2027 calendar, in thirteen cities, drawn by longitude. February: Whiskey & Whales, Hong Kong. April: Curators & Allocators, Cannes; ASEAN Rails, Bangkok. May: Whiskey & Whales, Miami; The MiCA Table, Amsterdam. June: After the Bell, New York. July: Hash & Capital, Nashville. August: Whiskey & Whales, Bali; Family Office Table, Hong Kong; Agents & Apps, San Francisco. October: Asia Capital Night, Singapore; Agentic Commerce, Las Vegas. November: Tokenised Funds, Singapore; Whiskey & Whales, Bangkok. December: Whiskey & Whales, Dubai; Sovereign Capital, Abu Dhabi.">
+  </picture>
+</a>
 
-[Portfolio](https://sahil.capvise.group) · [X](https://x.com/sahilxdev) · [LinkedIn](https://linkedin.com/in/sahilxdev) · [Telegram](https://t.me/sahilxdev) · [Email](mailto:sahil@capvise.group)
+<a href="https://github.com/sahilxdev?tab=repositories">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/builder-dark.svg">
+    <img src="assets/builder-light.svg" width="100%" alt="Builder first. Then rooms. Full-stack products since 2023, hands-on with open-source image and video models, and still shipping code.">
+  </picture>
+</a>
 
-## Code
+<a href="https://github.com/sahilxdev/cwtch-public">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/cwtch-dark.svg">
+    <img src="assets/cwtch-light.svg" width="100%" alt="Cwtch. Private watch parties for two on Netflix, Prime Video and YouTube. Play, pause and seek stay in step, and room messages are encrypted before they leave the browser. Chrome extension, JavaScript, Node.js relay, AES-GCM. Open source, 2026.">
+  </picture>
+</a>
 
-### [Cwtch](https://github.com/sahilxdev/cwtch-public)
+<a href="https://github.com/sahilxdev/Omni_Sweep">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/omnisweep-dark.svg">
+    <img src="assets/omnisweep-light.svg" width="100%" alt="OmniSweep. A gas relayer for wallets holding token dust and no gas to move it. It fronts the gas, repays itself from the swap and bridges what is left across chains. Solidity, LayerZero V2, 1inch, Next.js, ethers.js. ETHGlobal Buenos Aires, 2025.">
+  </picture>
+</a>
 
-A Chrome extension for private two-person watch parties on Netflix, Prime Video and YouTube. It keeps play, pause and seek in sync and adds room chat, reactions and shared timestamped moments. Room messages are encrypted in the extension with AES-GCM before they reach a small WebSocket relay. Open source under MIT, 2026.
+<a href="https://github.com/sahilxdev/hypersightexplorer">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/hypersight-dark.svg">
+    <img src="assets/hypersight-light.svg" width="100%" alt="HyperSight Explorer. A real-time block explorer for Hyperliquid, with live blocks and transactions, hash-aware search and a whale tracker. Next.js, TypeScript, TanStack Query, Lava RPC. HyperEVM Hackathon, 2025.">
+  </picture>
+</a>
 
-`Chrome MV3` `JavaScript` `Node.js` `WebSocket` `Docker`
-
-### [OmniSweep](https://github.com/sahilxdev/Omni_Sweep)
-
-A gas relayer for wallets stuck with token dust and no gas to move it. It fronts the gas, repays itself from the swap, and bridges what is left across chains, so the user pays nothing upfront. Built at ETHGlobal Buenos Aires, November 2025. [See the showcase](https://ethglobal.com/showcase/omnisweep-h5pck).
-
-`Solidity` `LayerZero V2` `1inch` `Next.js` `ethers.js`
-
-### [HyperSight Explorer](https://github.com/sahilxdev/hypersightexplorer)
-
-A real-time block explorer for Hyperliquid, with live blocks and transactions, hash-aware search, mainnet and testnet switching, and a whale tracker. Built for the HyperEVM Hackathon, 2025.
-
-`Next.js` `TypeScript` `TanStack Query` `Lava RPC`
-
-## Rooms
-
-In 2025, Capvise Global ran four founder and investor rooms in four countries in four months.
-
-<table>
-  <tr>
-    <td align="center" width="25%"><h3>6,400+</h3>applications</td>
-    <td align="center" width="25%"><h3>950+</h3>seats</td>
-    <td align="center" width="25%"><h3>4</h3>countries</td>
-    <td align="center" width="25%"><h3>12</h3>speakers</td>
-  </tr>
-</table>
-
-| When | City | Room | Alongside | Seats | Applications |
-| :-- | :-- | :-- | :-- | --: | --: |
-| Aug 2025 | Bali | Founder × VC Happy Hour | Coinfest Asia | 100+ | 600+ |
-| Sep to Oct 2025 | Singapore | Founder × VC Summit | TOKEN2049 | 500 | 4,000+ |
-| Oct 2025 | Dubai | Founder × VC Happy Hour | Blockchain Life | 150+ | 600+ |
-| Nov 2025 | Buenos Aires | Somnia Dev City | Devconnect Argentina | 200 | 1,200+ |
-
-Speakers came from Animoca Brands, Venom Foundation, Camp Network, Manta Network, Bitcoin.com, Somnia Network and others.
-
-**Next: 2027.** Sixteen rooms are on the calendar across thirteen cities, from Hong Kong in February to Abu Dhabi in December. Follow along at [luma.com/capvise](https://luma.com/capvise).
-
-<details>
-<summary>The 2027 calendar</summary>
-
-<br>
-
-| Month | Room | City |
-| :-- | :-- | :-- |
-| Feb | Whiskey & Whales | Hong Kong |
-| Apr | Curators & Allocators | Cannes |
-| Apr | ASEAN Rails | Bangkok |
-| May | Whiskey & Whales | Miami |
-| May | The MiCA Table | Amsterdam |
-| Jun | After the Bell | New York |
-| Jul | Hash & Capital | Nashville |
-| Aug | Whiskey & Whales | Bali |
-| Aug | Family Office Table | Hong Kong |
-| Aug | Agents & Apps | San Francisco |
-| Oct | Asia Capital Night | Singapore |
-| Oct | Agentic Commerce | Las Vegas |
-| Nov | Tokenised Funds | Singapore |
-| Nov | Whiskey & Whales | Bangkok |
-| Dec | Whiskey & Whales | Dubai |
-| Dec | Sovereign Capital | Abu Dhabi |
-
-</details>
-
-## Capvise Group
-
-Eight independent ventures, started in January 2025.
-
-| Venture | What it does |
-| :-- | :-- |
-| [Capvise Global](https://global.capvise.group) | Capital. Founder and investor rooms, introductions and fundraising support. |
-| [Capvise Labs](https://labs.capvise.group) | Technology. Experiments with AI. |
-| [Capvise Media](https://media.capvise.group) | Media. Technology journalism and campaigns. |
-| [Capvise Growth](https://growth.capvise.group) | Marketing. Market entry and audience acquisition. |
-| [Capvise Events](https://events.capvise.group) | Events. Event production. |
-| [Creator Network](https://creators.capvise.group) | Creators. Creator collaborations and creator businesses. |
-| [Capvise Club](https://club.capvise.group) | Communities. Technology communities and the companies that work with them. |
-| [The Rejected Club](https://rejectedclub.com) | Founders. Founder curation. |
-
-## Path
-
-| Year | Milestones |
-| :-- | :-- |
-| 2026 | Sat on the evaluation panel at Claude Impact Lab. Open-sourced Cwtch. |
-| 2025 | Founded Capvise Group. COO at BackersStage, April to December. Ran four rooms in four countries. Built OmniSweep at ETHGlobal Buenos Aires. |
-| 2024 | AI engineering with open-source image and video models. Data annotation at Innodata. |
-| 2023 | Started shipping full-stack products. |
-
-## Stack
-
-| Area | Tools |
-| :-- | :-- |
-| **Web** | TypeScript, JavaScript, Next.js, React, Node.js, Express, Tailwind CSS, Socket.io |
-| **Data** | PostgreSQL, MongoDB, Redis, Prisma |
-| **AI** | Python, Stable Diffusion, ComfyUI, AnimateDiff, Segment Anything 2 |
-| **Onchain** | Solidity, LayerZero V2, 1inch, ethers.js, wagmi |
-| **Infra** | Docker, AWS, Cloudflare, Vercel, Nginx |
-
-<br>
+<a href="https://capvise.group">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/group-dark.svg">
+    <img src="assets/group-light.svg" width="100%" alt="One group, eight ventures, drawn as a floor plan. Capvise Global, capital: founder and investor rooms. Capvise Labs, technology: experiments with AI. Capvise Media: technology journalism. Capvise Growth, marketing: market entry. Capvise Events: event production. Creator Network: creator collaborations. Capvise Club: technology communities. The Rejected Club: founder curation.">
+  </picture>
+</a>
 
 <p align="center">
-  Building something, or raising for it? Write to <a href="mailto:sahil@capvise.group">sahil@capvise.group</a>.
+  <a href="https://global.capvise.group">Capvise Global</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://labs.capvise.group">Labs</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://media.capvise.group">Media</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://growth.capvise.group">Growth</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://events.capvise.group">Events</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://creators.capvise.group">Creator Network</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://club.capvise.group">Club</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://rejectedclub.com">The Rejected Club</a>
 </p>
+
+<a href="mailto:sahil@capvise.group">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/block-dark.svg">
+    <img src="assets/block-light.svg" width="100%" alt="Building something, or raising for it? Write to sahil@capvise.group. Path: 2023, started shipping full-stack products. 2024, AI engineering with open-source image and video models; data annotation at Innodata. 2025, founded Capvise Group; COO at BackersStage, April to December; ran four rooms in four countries; built OmniSweep at ETHGlobal Buenos Aires. 2026, sat on the evaluation panel at Claude Impact Lab; open-sourced Cwtch. Tools: TypeScript, Next.js, React, Node.js, Tailwind CSS, PostgreSQL, MongoDB, Redis, Prisma, Python, Stable Diffusion, ComfyUI, AnimateDiff, Segment Anything 2, Solidity, LayerZero V2, 1inch, ethers.js, Docker, AWS, Cloudflare, Vercel.">
+  </picture>
+</a>
+
+<!-- The sheets are drawn by source/sheets.py. See source/README.md to change them. -->

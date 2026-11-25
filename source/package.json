@@ -1,0 +1,9 @@
+{
+  "name": "profile-sheets",
+  "private": true,
+  "description": "Typefaces for the profile README sheets",
+  "dependencies": {
+    "@fontsource-variable/instrument-sans": "^5",
+    "@fontsource-variable/playfair": "^5"
+  }
+}
