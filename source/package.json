@@ -1,9 +1,10 @@
 {
-  "name": "profile-sheets",
+  "name": "profile-scenes",
   "private": true,
-  "description": "Typefaces for the profile README sheets",
+  "description": "Typefaces and map data for the profile README scenes",
   "dependencies": {
     "@fontsource-variable/instrument-sans": "^5",
-    "@fontsource-variable/playfair": "^5"
+    "@fontsource-variable/playfair": "^5",
+    "world-atlas": "^2"
   }
 }
