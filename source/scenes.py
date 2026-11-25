@@ -111,146 +111,116 @@ def hero():
 
 
 
-# ------------------------------------------------------------------ rooms 2025
-R25 = [('Bali', 'August', 100, 600, '600+ applied', '100+ seats'), ('Singapore', 'September', 500, 4000, '4,000+ applied', '500 seats'),
-       ('Dubai', 'October', 150, 600, '600+ applied', '150+ seats'), ('Buenos Aires', 'November', 200, 1200, '1,200+ applied', '200 seats')]
+# ------------------------------------------------------------------ rooms, 2025 and 2026 together
+# (city, event, applied, seats, applied label, seats label)
+R25 = [('Bali', 'Founder × VC Happy Hour', 600, 100, '600+', '100+'), ('Singapore', 'Founder × VC Summit', 4000, 500, '4,000+', '500'),
+       ('Dubai', 'Founder × VC Happy Hour', 600, 150, '600+', '150+'), ('Buenos Aires', 'Somnia Dev City', 1200, 200, '1,200+', '200')]
+R26 = [('Hong Kong', 'Whiskey & Whales', 850, 150, '850+', '150'), ('Hong Kong', 'Whales After Dark', 750, 100, '750+', '100'),
+       ('Cannes', 'Onchain Dev City', 600, 200, '600+', '200'), ('Cannes', 'Whiskey & Whales', 700, 100, '700+', '100'),
+       ('Paris', 'Founders & Capital', 30, 30, '30+', '30'), ('Bali', 'Whiskey & Whales', 150, 50, '150+', '50'),
+       ('Barcelona', 'Whiskey & Whales', 550, 150, '550+', '150'), ('Seoul', 'Kimchi & Whales', 0, 10, None, '10'),
+       ('Singapore', 'Money Layer', 900, 300, '900+', '300'), ('Singapore', 'Institutions & Whales', 550, 25, '550+', '25'),
+       ('Mumbai', 'Onchain Dev City', 1000, 250, '1,000+', '250'), ('Mumbai', 'Money Layer', 750, 250, '750+', '250'),
+       ('London', 'Money Layer', 350, 150, '350+', '150')]
 
 
 def rooms():
-    s = Panel(640, PAPER, 'Four rooms, four countries, four months of 2025. Each little figure is 25 people. Bali, August: 600+ applied for 100+ seats. Singapore, September: 4,000+ applied for 500 seats. Dubai, October: 600+ applied for 150+ seats. Buenos Aires, November: 1,200+ applied for 200 seats. In all, 6,400+ applied for 950+ seats.')
-    W, H = s.W, s.H
-    a = s.add
-    s.text(53, 92, 'Four rooms, four countries, four months.', S5, 44, INK2, ls=-0.035)
-    s.runs(56, 128, [('6,400+ people applied for ', S4, MUTE), ('950+ seats', S6, SAGE), ('.', S4, MUTE)], 19.5)
-    u, gap, sp, per = 27, 0.75, 0.56, 25
-    xs = [236, 462, 722, 912]
-    oy = 286
+    a25, s25 = sum(r[2] for r in R25), sum(r[3] for r in R25)
+    a26, s26 = sum(r[2] for r in R26), sum(r[3] for r in R26)
+    say = lambda rs: ' '.join(f'{ev}, {city}: {(al + " applied for ") if al else ""}{sl} seats.' for city, ev, _, _, al, sl in rs)
+    alt = (f'Seventeen rooms so far. {a25 + a26:,}+ people applied for {s25 + s26:,}+ seats. Each little figure is 25 people. '
+           f'2025, four rooms: {say(R25)} 2026, thirteen rooms: {say(R26)}')
+    gap, sp, per, hh, t = 0.7, 0.58, 25, 1.9, 0.16
     WR, WL, WT, FLOOR = '#6B7A4F', '#55633E', '#93A374', '#FFFFFF'
-    for ri, ((city, month, seats, apps, al, sl), ox) in enumerate(zip(R25, xs)):
-        side = math.sqrt(seats) / 4.4
-        iso = Iso(ox, oy, u)
-        hh, t = 1.9, 0.16
-        cols = max(3, round(side / sp))
-        rows = round(apps / per / cols)
-        L = rows * sp
-        # ground shadow for the crowd, then the room
-        a(iso.box(0, 0, -0.2, side, side, 0.2, FLOOR, '#C9C9BB', '#B5B5A6'))
-        a(iso.box(-t, 0, -0.2, t, side, hh + 0.2, WT, WR, WL))
-        a(iso.box(-t, -t, -0.2, side + t, t, hh + 0.2, WT, WR, '#4A5736'))
-        # seated inside
-        n_in = round(seats / per); ic = max(2, round(math.sqrt(n_in))); k = 0
-        inside = []
-        for r in range(math.ceil(n_in / ic)):
-            for cidx in range(ic):
-                if k >= n_in: break
-                x = (cidx + 0.5) * side / ic; y = (r + 0.5) * side / math.ceil(n_in / ic)
-                inside.append((x + y, person(*iso.p(x, y), SAGE, 0.82, so=0.12))); k += 1
-        for _, g in sorted(inside, key=lambda q: q[0]): a(g)
-        # the crowd at the door, a ripple running up it
-        for r in range(rows):
-            row = ''
-            for cidx in range(cols):
-                x = (cidx + 0.5) * side / cols; y = side + gap + (r + 0.5) * sp
-                row += person(*iso.p(x, y), INK2, 0.82, so=0.10)
-            a(f'<g class="rp" style="animation-delay:-{(rows - r) * 0.09 + ri * 0.4:.2f}s">{row}</g>')
-        # label, tucked above the room
-        lx, ly = iso.p(0, 0, hh)
-        cx = ox + (side * C30 * u - side * C30 * u) / 2
-        s.text(lx, ly - 62, city, S5, 25, INK2, ls=-0.02, anchor='middle')
-        s.text(lx, ly - 40, al, S6, 14.5, INK2, anchor='middle')
-        s.text(lx, ly - 21, sl, S6, 14.5, SAGE, anchor='middle')
-    # legend
-    lx, ly = 760, H - 62
-    a(person(lx, ly + 8, INK2, 0.82)); s.text(lx + 16, ly + 2, 'one figure is 25 people', S4, 15, MUTE)
-    a(person(lx, ly + 36, SAGE, 0.82)); s.text(lx + 16, ly + 30, 'sage figures had a seat', S4, 15, MUTE)
-    s.css.append('.rp{animation:rp 2.6s ease-in-out infinite}' + kf('rp', [(0, 'transform:none'), (10, 'transform:translateY(-4px)'), (22, 'transform:none'), (100, 'transform:none')]))
-    return s
-
-
-# ------------------------------------------------------------------ rooms 2026
-R26 = [('Hong Kong', 'Whiskey & Whales', 850, 150, '850+'), ('Hong Kong', 'Whales After Dark', 750, 100, '750+'),
-       ('Cannes', 'Onchain Dev City', 600, 200, '600+'), ('Cannes', 'Whiskey & Whales', 700, 100, '700+'),
-       ('Paris', 'Founders & Capital', 30, 30, '30+'), ('Bali', 'Whiskey & Whales', 150, 50, '150+'),
-       ('Barcelona', 'Whiskey & Whales', 550, 150, '550+'), ('Seoul', 'Kimchi & Whales', 0, 10, None),
-       ('Singapore', 'Money Layer', 900, 300, '900+'), ('Singapore', 'Institutions & Whales', 550, 25, '550+'),
-       ('Mumbai', 'Onchain Dev City', 1000, 250, '1,000+'), ('Mumbai', 'Money Layer', 750, 250, '750+'),
-       ('London', 'Money Layer', 350, 150, '350+')]
-
-
-def rooms26():
-    tot_a = sum(r[2] for r in R26); tot_s = sum(r[3] for r in R26)
-    alt = ('Thirteen rooms in 2026. Each little figure is 25 people. ' +
-           ' '.join(f'{ev}, {city}: {(al + " applied for ") if al else ""}{seats} seats.' for city, ev, apps, seats, al in R26) +
-           f' In all, {tot_a:,}+ applied for {tot_s:,} seats.')
-    u, gap, sp, per, hh, t = 21, 0.7, 0.58, 25, 1.9, 0.16
-    WR, WL, WT, FLOOR = '#6B7A4F', '#55633E', '#93A374', '#FFFFFF'
-    cells = []
-    for city, ev, apps, seats, al in R26:
-        side = max(math.sqrt(seats) / 4.4, 0.95)
-        cols = max(2, round(side / sp))
-        n_out = max(1, round(apps / per)) if apps else 0
-        rows = math.ceil(n_out / cols)
-        ymax = side + (gap + rows * sp if rows else 0)
-        left = max(ymax * C30 * u + 6, 78); right = max(side * C30 * u + 6, 78)
-        depth = (max(side, cols * sp) + ymax) * S30 * u
-        cells.append(dict(city=city, ev=ev, apps=apps, seats=seats, al=al, side=side, cols=cols, n_out=n_out, rows=rows, left=left, right=right, depth=depth))
-    # three balanced rows: pick the split whose widest row is narrowest
     x0, x1 = 44, 956
-    wd = [c['left'] + c['right'] for c in cells]
-    best = None
-    for split in ((5, 4, 4), (4, 5, 4), (4, 4, 5)):
-        i = 0; rows_w = []
-        for n in split:
-            rows_w.append(sum(wd[i:i + n])); i += n
-        if best is None or max(rows_w) < best[0]: best = (max(rows_w), split)
-    lines, i = [], 0
-    for n in best[1]:
-        lines.append(cells[i:i + n]); i += n
-    top = 150; label_h = 84
-    heights = [label_h + hh * u + max(c['depth'] for c in ln) + 34 for ln in lines]
-    s = Panel(round(top + sum(heights) + 46), '#E9E8DE', alt)
+
+    def measure(u):
+        groups = []
+        for rs in (R25, R26):
+            cells = []
+            for city, ev, apps, seats, al, sl in rs:
+                side = max(math.sqrt(seats) / 4.4, 0.95)
+                cols = max(2, round(side / sp))
+                n_out = max(1, round(apps / per)) if apps else 0
+                nrow = math.ceil(n_out / cols)
+                ymax = side + (gap + nrow * sp if nrow else 0)
+                cells.append(dict(city=city, ev=ev, seats=seats, al=al, sl=sl, side=side, cols=cols, n_out=n_out, rows=nrow,
+                                  left=max(ymax * C30 * u + 6, 78), right=max(side * C30 * u + 6, 78),
+                                  depth=(max(side, cols * sp) + ymax) * S30 * u))
+            groups.append(cells)
+        return groups
+
+    def split(cells, n):                       # n balanced rows, in order
+        wd = [c['left'] + c['right'] for c in cells]
+        if n == 1: return [cells], sum(wd)
+        best = None
+        for sp_ in ((5, 4, 4), (4, 5, 4), (4, 4, 5)):
+            i = 0; rw = []
+            for k in sp_:
+                rw.append(sum(wd[i:i + k])); i += k
+            if best is None or max(rw) < best[0]: best = (max(rw), sp_)
+        out, i = [], 0
+        for k in best[1]:
+            out.append(cells[i:i + k]); i += k
+        return out, best[0]
+
+    u = 22.0
+    while True:                                # the largest scale at which every row fits
+        g25, g26 = measure(u)
+        l25, w25 = split(g25, 1); l26, w26 = split(g26, 3)
+        if max(w25, w26) <= x1 - x0: break
+        u -= 0.25
+    fs = u / 21 * 0.66
+    label_h, head_h, top = 74, 62, 148
+    blocks = [('2025', 'Four rooms.', a25, f'{s25:,}+', l25), ('2026', 'Thirteen rooms.', a26, f'{s26:,}', l26)]
+    hts = [[label_h + hh * u + max(c['depth'] for c in ln) + 26 for ln in lines] for *_, lines in blocks]
+    s = Panel(round(top + sum(head_h + sum(h) for h in hts) + 50), PAPER, alt)
     W, H = s.W, s.H
     a = s.add
-    s.text(53, 92, 'Then thirteen more.', S5, 44, INK2, ls=-0.035)
-    s.runs(56, 128, [(f'In 2026, {tot_a:,}+ people applied for ', S4, MUTE), (f'{tot_s:,} seats', S6, SAGE), ('.', S4, MUTE)], 19.5)
-    y = top; ri = 0
-    for ln, hgt in zip(lines, heights):
-        slack = (x1 - x0 - sum(c['left'] + c['right'] for c in ln)) / len(ln)
-        x = x0
-        oy = y + label_h + hh * u
-        for c in ln:
-            ox = x + slack / 2 + c['left']; x += c['left'] + c['right'] + slack
-            iso = Iso(ox, oy, u); side = c['side']
-            a(iso.box(0, 0, -0.2, side, side, 0.2, FLOOR, '#C3C3B4', '#AFAFA0'))
-            a(iso.box(-t, 0, -0.2, t, side, hh + 0.2, WT, WR, WL))
-            a(iso.box(-t, -t, -0.2, side + t, t, hh + 0.2, WT, WR, '#4A5736'))
-            n_in = max(1, round(c['seats'] / per)); ic = max(1, round(math.sqrt(n_in))); nr = math.ceil(n_in / ic); k = 0
-            inside = []
-            for r in range(nr):
-                for ci in range(ic):
-                    if k >= n_in: break
-                    px, py = (ci + 0.5) * side / ic, (r + 0.5) * side / nr
-                    inside.append((px + py, person(*iso.p(px, py), SAGE, 0.66, so=0.12))); k += 1
-            for _, g in sorted(inside, key=lambda q: q[0]): a(g)
-            k = 0
-            for r in range(c['rows']):
-                row = ''
-                for ci in range(c['cols']):
-                    if k >= c['n_out']: break
-                    row += person(*iso.p((ci + 0.5) * sp, side + gap + (r + 0.5) * sp), INK2, 0.66, so=0.10); k += 1
-                a(f'<g class="rp" style="animation-delay:-{(c["rows"] - r) * 0.09 + ri * 0.31:.2f}s">{row}</g>')
-            lx, ly = iso.p(0, 0, hh)
-            s.text(lx, ly - 54, c['city'], S5, 19, INK2, ls=-0.02, anchor='middle')
-            s.text(lx, ly - 36, c['ev'], S4, 13.5, MUTE, anchor='middle')
-            if c['al']:
-                wA = S6.width(c['al'] + ' applied', 13.5); wS = S6.width(f'  {c["seats"]} seats', 13.5)
-                xx = lx - (wA + wS) / 2
-                s.text(xx, ly - 17, c['al'] + ' applied', S6, 13.5, INK2); s.text(xx + wA, ly - 17, f'  {c["seats"]} seats', S6, 13.5, SAGE)
-            else:
-                s.text(lx, ly - 17, f'{c["seats"]} seats', S6, 13.5, SAGE, anchor='middle')
-            ri += 1
-        y += hgt
-    lx, ly = 56, H - 44
+    s.text(53, 92, 'Seventeen rooms so far.', S5, 44, INK2, ls=-0.035)
+    s.runs(56, 128, [(f'{a25 + a26:,}+ people applied for ', S4, MUTE), (f'{s25 + s26:,}+ seats', S6, SAGE), ('.', S4, MUTE)], 19.5)
+    y, ri = top, 0
+    for (yr, what, apps, seats_l, lines), hs in zip(blocks, hts):
+        s.text(54, y + 40, yr, S5, 30, INK2, ls=-0.03, feat=TNUM)
+        xe = s.runs(136, y + 39, [(what + ' ', S4, MUTE), (f'{apps:,}+ applied', S6, INK2), (' for ', S4, MUTE), (f'{seats_l} seats', S6, SAGE)], 16)
+        s.line(xe + 18, y + 33, W - 54, y + 33, PAPER3, 1.4)
+        y += head_h
+        for ln, hgt in zip(lines, hs):
+            slack = (x1 - x0 - sum(c['left'] + c['right'] for c in ln)) / len(ln)
+            x = x0; oy = y + label_h + hh * u
+            for c in ln:
+                ox = x + slack / 2 + c['left']; x += c['left'] + c['right'] + slack
+                iso = Iso(ox, oy, u); side = c['side']
+                a(iso.box(0, 0, -0.2, side, side, 0.2, FLOOR, '#C9C9BB', '#B5B5A6'))
+                a(iso.box(-t, 0, -0.2, t, side, hh + 0.2, WT, WR, WL))
+                a(iso.box(-t, -t, -0.2, side + t, t, hh + 0.2, WT, WR, '#4A5736'))
+                n_in = max(1, round(c['seats'] / per)); ic = max(1, round(math.sqrt(n_in))); nr = math.ceil(n_in / ic); k = 0
+                inside = []
+                for r in range(nr):
+                    for ci in range(ic):
+                        if k >= n_in: break
+                        px, py = (ci + 0.5) * side / ic, (r + 0.5) * side / nr
+                        inside.append((px + py, person(*iso.p(px, py), SAGE, fs, so=0.12))); k += 1
+                for _, g in sorted(inside, key=lambda q: q[0]): a(g)
+                k = 0
+                for r in range(c['rows']):
+                    row = ''
+                    for ci in range(c['cols']):
+                        if k >= c['n_out']: break
+                        row += person(*iso.p((ci + 0.5) * sp, side + gap + (r + 0.5) * sp), INK2, fs, so=0.10); k += 1
+                    a(f'<g class="rp" style="animation-delay:-{(c["rows"] - r) * 0.09 + ri * 0.31:.2f}s">{row}</g>')
+                lx, ly = iso.p(0, 0, hh)
+                s.text(lx, ly - 50, c['city'], S5, 19, INK2, ls=-0.02, anchor='middle')
+                s.text(lx, ly - 32, c['ev'], S4, 13.5, MUTE, anchor='middle')
+                if c['al']:
+                    wA = S6.width(c['al'] + ' applied', 13.5); wS = S6.width(f'  {c["sl"]} seats', 13.5)
+                    xx = lx - (wA + wS) / 2
+                    s.text(xx, ly - 14, c['al'] + ' applied', S6, 13.5, INK2); s.text(xx + wA, ly - 14, f'  {c["sl"]} seats', S6, 13.5, SAGE)
+                else:
+                    s.text(lx, ly - 14, f'{c["sl"]} seats', S6, 13.5, SAGE, anchor='middle')
+                ri += 1
+            y += hgt
+    lx, ly = 56, H - 40
     a(person(lx + 6, ly + 6, INK2, 0.75)); s.text(lx + 20, ly, 'one figure is 25 people', S4, 14.5, MUTE)
     a(person(lx + 206, ly + 6, SAGE, 0.75)); s.text(lx + 220, ly, 'sage figures had a seat', S4, 14.5, MUTE)
     s.css.append('.rp{animation:rp 2.6s ease-in-out infinite}' + kf('rp', [(0, 'transform:none'), (10, 'transform:translateY(-4px)'), (22, 'transform:none'), (100, 'transform:none')]))
@@ -371,8 +341,8 @@ def tour():
         s.text(x + dx, y + dy, c, S5, 14, PAPER, anchor=an)
     a(f'<g><circle r="11" fill="{LAMP}" opacity=".25"/><circle r="5" fill="#FFF8D8"/>'
       f'<animateMotion dur="{T}s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;{RUN / 100};1" path="{full}"/></g>')
-    s.text(53, 92, 'Then the map filled in.', S5, 44, PAPER, ls=-0.035)
-    s.text(56, 126, 'Four rooms in 2025, thirteen in 2026, sixteen on the 2027 calendar.', S4, 19.5, MUTE_D)
+    s.text(53, 92, 'And sixteen more on the calendar.', S5, 44, PAPER, ls=-0.035)
+    s.text(56, 126, 'Every room from 2025 to 2027, in the order they happen.', S4, 19.5, MUTE_D)
     s.text(W - 56, H - 40, 'luma.com/capvise', S4, 15, MUTE, anchor='end')
     s.css.append(f'.pg{{animation:pg {T}s ease-out infinite}}' + kf('pg', [(0, 'transform:scale(1);opacity:.9'), (6, 'transform:scale(5);opacity:0'), (100, 'transform:scale(5);opacity:0')]))
     return s
@@ -595,50 +565,55 @@ def path_():
     return s
 
 
-# ------------------------------------------------------------------ contact
+# ------------------------------------------------------------------ tools strip and contact
 TOOLS1 = ['TypeScript', 'Next.js', 'React', 'Node.js', 'PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'Docker', 'AWS', 'Cloudflare']
 TOOLS2 = ['Python', 'Stable Diffusion', 'ComfyUI', 'AnimateDiff', 'Segment Anything 2', 'Solidity', 'LayerZero V2', '1inch', 'ethers.js', 'Vercel']
 
 
+def band(s, words, y, col, dotc, cls, size=33):
+    m = s.mark(); x = 0
+    for rep in range(2):
+        for wd in words:
+            x += s.text(x, y, wd, S5, size, col, ls=-0.02) + 22
+            s.add(f'<circle cx="{f(x)}" cy="{f(y - size * .3)}" r="4" fill="{dotc}"/>'); x += 26
+        if rep == 0: period = x
+    s.group_since(m, f'<g class="{cls}">')
+    return period
+
+
+def stack():
+    s = Panel(150, INK, 'Tools: ' + ', '.join(TOOLS1 + TOOLS2) + '.')
+    p1 = band(s, TOOLS1, 66, '#8B9774', SAGE, 'mq1')
+    p2 = band(s, TOOLS2, 116, '#5F6A4E', SAGE_D, 'mq2')
+    s.css.append(f'.mq1{{animation:mq1 46s linear infinite}}@keyframes mq1{{to{{transform:translateX(-{f(p1)}px)}}}}'
+                 f'.mq2{{transform:translateX(-{f(p2)}px);animation:mq2 54s linear infinite}}@keyframes mq2{{to{{transform:translateX(0)}}}}')
+    return s
+
+
 def contact():
-    s = Panel(470, INK, 'Tools: ' + ', '.join(TOOLS1 + TOOLS2) + '. Building something, or raising for it? Write to sahil@capvise.group.')
+    s = Panel(350, INK, 'Building something, or raising for it? Write to sahil@capvise.group.')
     W, H = s.W, s.H
     a = s.add
-
-    def band(words, y, col, dotc, cls, size=33):
-        m = s.mark(); x = 0
-        for rep in range(2):
-            for wd in words:
-                x += s.text(x, y, wd, S5, size, col, ls=-0.02) + 22
-                a(f'<circle cx="{f(x)}" cy="{f(y - size * .3)}" r="4" fill="{dotc}"/>'); x += 26
-            if rep == 0: period = x
-        s.group_since(m, f'<g class="{cls}">')
-        return period
-    p1 = band(TOOLS1, 76, '#5B654C', SAGE, 'mq1')
-    p2 = band(TOOLS2, 128, '#454D3A', SAGE_D, 'mq2')
-    # the door at the end of the corridor
     s.extra_defs.append(f'<linearGradient id="spl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{LAMP}" stop-opacity="0"/><stop offset="1" stop-color="{LAMP}" stop-opacity=".5"/></linearGradient>'
-                        '<radialGradient id="dg"><stop offset="0" stop-color="#5A6340" stop-opacity=".9"/><stop offset="1" stop-color="#171A14" stop-opacity="0"/></radialGradient>')
-    dx, dy = 838, 216
+                        '<radialGradient id="dg"><stop offset="0" stop-color="#5A6340" stop-opacity=".9"/><stop offset="1" stop-color="#171A14" stop-opacity="0"/></radialGradient>'
+                        f'<linearGradient id="dl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8D6"/><stop offset="1" stop-color="{LAMP}"/></linearGradient>')
+    dx, dy = 838, 92
     a(f'<ellipse cx="{dx + 40}" cy="{dy + 90}" rx="260" ry="200" fill="url(#dg)"/>')
     a(f'<path class="glow" d="M{dx} {dy + 176}L{dx - 250} {dy + 232}H{dx + 30}L{dx + 84} {dy + 176}Z" fill="url(#spl)"/>')
     a(f'<rect x="{dx - 8}" y="{dy - 8}" width="100" height="184" rx="4" fill="{SAGE_D}"/><rect x="{dx}" y="{dy}" width="84" height="176" fill="url(#dl2)"/>')
-    s.extra_defs.append(f'<linearGradient id="dl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8D6"/><stop offset="1" stop-color="{LAMP}"/></linearGradient>')
     a(f'<path d="M{dx + 84} {dy}l52 22v176l-52 -22Z" fill="{SAGE}"/><circle cx="{dx + 124}" cy="{dy + 112}" r="4" fill="{LAMP}"/>')
     for i in range(3):
         a(f'<g class="wk" style="animation-delay:-{i * 3:.1f}s"><g class="bob">{person(dx + 42, dy + 190, INK2 if i % 2 else SAGE_D, 1.9, so=.25)}</g></g>')
-    s.text(56, 268, 'Building something, or raising for it?', S4, 21, MUTE_D)
-    s.text(53, 330, 'Write to', S5, 58, PAPER, ls=-0.04)
-    s.text(53, 396, 'sahil@capvise.group', S5, 58, SAGE_L, ls=-0.04)
-    s.css.append(f'.mq1{{animation:mq1 46s linear infinite}}@keyframes mq1{{to{{transform:translateX(-{f(p1)}px)}}}}'
-                 f'.mq2{{transform:translateX(-{f(p2)}px);animation:mq2 54s linear infinite}}@keyframes mq2{{to{{transform:translateX(0)}}}}'
-                 '.glow{animation:glow 4s ease-in-out infinite alternate}@keyframes glow{from{opacity:.6}to{opacity:1}}'
+    s.text(56, 132, 'Building something, or raising for it?', S4, 21, MUTE_D)
+    s.text(53, 196, 'Write to', S5, 58, PAPER, ls=-0.04)
+    s.text(53, 262, 'sahil@capvise.group', S5, 58, SAGE_L, ls=-0.04)
+    s.css.append('.glow{animation:glow 4s ease-in-out infinite alternate}@keyframes glow{from{opacity:.6}to{opacity:1}}'
                  '.bob{animation:bob .5s ease-in-out infinite alternate}@keyframes bob{to{transform:translateY(-3px)}}'
                  '.wk{animation:wk 9s linear infinite}' + kf('wk', [(0, 'transform:translate(-330px,58px) scale(1.25);opacity:0'), (8, 'opacity:1'), (78, 'transform:translate(-20px,0) scale(1);opacity:1'), (92, 'transform:translate(0,-6px) scale(.94);opacity:0'), (100, 'transform:translate(0,-6px) scale(.94);opacity:0')]))
     return s
 
 
-SCENES = {'hero': hero, 'rooms': rooms, 'rooms26': rooms26, 'tour': tour, 'cwtch': cwtch, 'omnisweep': omni, 'hypersight': hyper, 'group': group, 'path': path_, 'contact': contact}
+SCENES = {'hero': hero, 'path': path_, 'cwtch': cwtch, 'omnisweep': omni, 'hypersight': hyper, 'stack': stack, 'rooms': rooms, 'tour': tour, 'group': group, 'contact': contact}
 
 if __name__ == '__main__':
     only = sys.argv[1:]
